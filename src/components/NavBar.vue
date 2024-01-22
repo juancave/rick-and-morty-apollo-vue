@@ -4,14 +4,13 @@
       <img alt="Vue logo" class="logo" src="@/assets/logo.svg" />
       <nav class="nav">
         <RouterLink class="link" to="/">Home</RouterLink>
-        <RouterLink class="link" to="/about">About</RouterLink>
         <RouterLink class="link" to="/characters">Characters</RouterLink>
       </nav>
     </div>
   </div>
  </template>
  
- <style scoped>
+<style scoped>
  .container {
   padding: 0.8rem;
   display: flex;
@@ -40,7 +39,6 @@
 
   &:hover {
     text-decoration: underline;
-    background-color: unset;
   }
 }
 
@@ -59,5 +57,5 @@
     gap: 0;
   }
  }
- </style>
+</style>
  
