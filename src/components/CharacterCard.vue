@@ -1,17 +1,13 @@
 <script setup lang="ts">
-defineProps<{
-  id: string
-  name: string
-  status: string
-  species: string
-  gender: string
-}>()
+import type { Character } from '../interfaces/Character'
+
+defineProps<Character>()
 </script>
 
 <template>
   <article class="card">
     <div class="image-wrapper">
-      <img :src="'https://rickandmortyapi.com/api/character/avatar/' + id + '.jpeg'" :alt="name">
+      <img :src="image" :alt="name">
     </div>
     <div class="content">
       <div class="section">
@@ -19,10 +15,13 @@ defineProps<{
       </div>
       <hr>
       <div class="section">
-        <span class="bold">Status: </span><span class="status"><span class="status-icon"></span>{{ status }} {{ species }}</span>
+        <span class="bold">Status: </span><span>{{ status }}</span>
       </div>
       <div class="section">
-        <span class="bold">Gender: </span><span class="gender">{{ gender }}</span>
+        <span class="bold">Species: </span><span>{{ species }}</span>
+      </div>
+      <div class="section">
+        <span class="bold">Gender: </span><span>{{ gender }}</span>
       </div>
     </div>
   </article>
