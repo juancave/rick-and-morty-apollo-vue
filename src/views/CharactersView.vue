@@ -1,72 +1,34 @@
 <script setup lang="ts">
 import CharacterCard from '../components/CharacterCard.vue'
 
-const mockData = [
-  {
-    "id": "1",
-    "name": "Rick Sanchez",
-    "status": "Alive",
-    "species": "Human",
-    "gender": "Male"
-  },
-  {
-    "id": "2",
-    "name": "Morty Smith",
-    "status": "Alive",
-    "species": "Human",
-    "gender": "Male"
-  },
-  {
-    "id": "3",
-    "name": "Summer Smith",
-    "status": "Alive",
-    "species": "Human",
-    "gender": "Female"
-  },
-  {
-    "id": "4",
-    "name": "Beth Smith",
-    "status": "Alive",
-    "species": "Human",
-    "gender": "Female"
-  },
-  {
-    "id": "5",
-    "name": "Jerry Smith",
-    "status": "Alive",
-    "species": "Human",
-    "gender": "Male"
-  },
-  {
-    "id": "6",
-    "name": "Abadango Cluster Princess",
-    "status": "Alive",
-    "species": "Alien",
-    "gender": "Female"
-  },
-  {
-    "id": "7",
-    "name": "Abradolf Lincler",
-    "status": "unknown",
-    "species": "Human",
-    "gender": "Male"
-  },
-  {
-    "id": "8",
-    "name": "Adjudicator Rick",
-    "status": "Dead",
-    "species": "Human",
-    "gender": "Male"
+import gql from 'graphql-tag'
+import { useQuery } from '@vue/apollo-composable'
+
+const CHARACTERS_QUERY = gql`
+  query Characters {
+    characters {
+      results {
+        id
+        name
+        status
+        image
+        species
+        gender
+      }
+    }
   }
-];
+`
+
+const { result, loading, error } = useQuery(CHARACTERS_QUERY)
 
 </script>
 
 <template>
   <div class="container">
-    <template v-for="item in mockData">
-      <CharacterCard
-        :name="item.name" :gender="item.gender" :id="item.id" :status="item.status" :species="item.species" />
+    <p v-if="error">Something went wrong...</p>
+    <p v-if="loading">Loading...</p>
+    <template v-else v-for="character in result.characters.results" :key="character.id">
+      <CharacterCard v-bind="character" />
     </template>
   </div>
 </template>
