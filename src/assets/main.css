@@ -19,6 +19,10 @@ a,
   padding: 3px;
 }
 
+.bold {
+  font-weight: bold;
+}
+
 a:hover {
   text-decoration: underline;
 }
